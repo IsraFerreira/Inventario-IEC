@@ -17,7 +17,7 @@
 <?php
 
 
-include_once('con.php');
+include_once('con1.php');
 
 //criar a conexão
 $conn2 = mysqli_connect($servidor, $usuario, $senha, $dbname);

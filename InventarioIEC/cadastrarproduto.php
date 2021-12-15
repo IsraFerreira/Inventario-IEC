@@ -1,5 +1,5 @@
 ﻿<?php
-include_once('con.php');
+include_once('con1.php');
 
 //criar a conexão
 $connnn = mysqli_connect($servidor, $usuario, $senha, $dbname);

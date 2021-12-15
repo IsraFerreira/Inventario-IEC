@@ -1,6 +1,6 @@
 ﻿<?php
 session_start();
-include_once('con.php');
+include_once('con1.php');
 
 //criar a conexão
 

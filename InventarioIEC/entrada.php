@@ -28,7 +28,7 @@
 
 <?php
 
-include_once('con.php');
+include_once('con1.php');
 
 
 //criando tabela e o cabeçalho de dados:

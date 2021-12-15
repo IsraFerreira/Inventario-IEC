@@ -1,7 +1,7 @@
 ﻿<?php
 session_start();
 include_once('conexaoapagar.php');
-include_once('con.php');
+include_once('con1.php');
 
 //criar a conexão
 $conn = mysqli_connect($servidor, $usuario, $senha, $dbname);	
