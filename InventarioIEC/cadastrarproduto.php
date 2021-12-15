@@ -1,8 +1,5 @@
 ﻿<?php
-$servidor = "localhost";
-$usuario = "root";
-$senha = "9L@d@$9";
-$dbname = "estoque";
+include_once('con.php');
 
 //criar a conexão
 $connnn = mysqli_connect($servidor, $usuario, $senha, $dbname);
@@ -45,7 +42,7 @@ Preço R$:
 
 <input type="reset" value="Limpar">
 
-<a href="visualizar.php"><input type="button" value="Visualizar Estoque"></a></center>
+<a href="visualizar.php?pagina=1"><input type="button" value="Visualizar Estoque"></a></center>
 
 </form>
 

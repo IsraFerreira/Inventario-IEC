@@ -17,15 +17,12 @@
 <?php
 
 
-$servidor = "localhost";
-$usuario = "root";
-$senha = "9L@d@$9";
-$dbname = "estoque";
+include_once('con.php');
 
 //criar a conexão
 $conn2 = mysqli_connect($servidor, $usuario, $senha, $dbname);
 
-if(mysqli_connect_errno($conn2)){
+if(!$conn2){
 	 echo "Falha na conexão com o banco de dados";
 }else{
      echo "<center><h3>Produto Editado</h3></center>";
@@ -58,7 +55,7 @@ Nome:
 Quantidade:
 <input type="int" name="quantidade2" value="<?php echo $quantidade; ?>" readonly="true"/><br><br>
 
-Quantidade Retidada:
+Quantidade Retirada:
 <input type="int" name="quantidaderet" value="0" required/><br><br>
 
 Quantidade Acrescentada:

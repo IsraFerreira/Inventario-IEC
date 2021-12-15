@@ -23,13 +23,13 @@ echo $login;
 
 <br>
 <center>
-<a href="visualizar.php"><input type="button" value="Visualizar Estoque"></a>
+<a href="visualizar.php?pagina=1"><input type="button" value="Visualizar Estoque"></a>
 
-<a href="entrada.php"><input type="button" value="Entrada Produto Novo"></a>
+<a href="entrada.php?pagina=1"><input type="button" value="Cadastrar Produto Novo"></a>
 
-<a href="entradasaida.php"><input type="button" value="Entrada/Saída Produto"></a></center>
+<a href="entradasaida.php?pagina=1"><input type="button" value="Entrada/Saída Produto"></a></center>
 
 </form>
 </body>
 <!-- Feito por: Israel Ferreira Nonato da Silva, venda ou troca sem passar pelo mesmo será vista como crime de plágio. -->
-</html>
+</html> 

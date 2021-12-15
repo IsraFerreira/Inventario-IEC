@@ -3,6 +3,19 @@
 <head>
 <LINK REL="SHORTCUT ICON" href="imagens/imagem2.jpg">
 <link href="./styles2/css.css" rel="stylesheet" type="text/css">
+
+<script language="javascript">
+function aumenta(obj){
+obj.style.height="30px";
+obj.style.width="32px";}
+
+function diminui(obj){
+obj.style.height="15px";
+obj.style.width="16px";}
+
+
+</script>
+
 <title> Entrada de Produtos </title>
 </head>
 <body 
@@ -19,6 +32,7 @@
 <p><center>
 <form action="<?php echo $_SERVER['PHP_SELF']; ?>">
 <input type="text" name="parametro" placeholder="Filtrar" />
+<input type="text" name="pagina" value="1" hidden />
 <input type="submit" value="Ordenar" />
 </form>
 </p></center>
@@ -27,7 +41,7 @@
 
 
 <?php
-
+include_once('con.php');
 
 
 
@@ -38,16 +52,16 @@ echo "<th> ID </th>";
 echo "<th> Nome </th>";
 echo "<th> Quantidade </th>";
 echo "<th> Preço </th>";
-echo "<th> Editar </th>";
-echo "<th> Remover </th>";
+echo "<th> Ações </th>";
 echo "</tr>";
 
 
 
 
 
-
 $pagina = $_GET['pagina'];
+
+
 if (!$pagina) {
 $paginamarcada = "1";
 } else {
@@ -62,7 +76,7 @@ $paginamarcada = $pagina;
 //conectando ao banco de dados;
 $parametro = filter_input(INPUT_GET, "parametro");
 
-$strcon = mysqli_connect('localhost', 'root', '9L@d@$9', 'estoque') or die ('Erro ao conectar ao banco de dados');
+$strcon = mysqli_connect($servidor, $usuario, $senha, $dbname) or die ('Erro ao conectar ao banco de dados');
 //$sql = "SELECT * FROM dadospaciente";
 //$resultado = mysqli_query($strcon, "$sql LIMIT $inicio,$total_registros") or die ("Erro ao tentar cadastrar registro");
 
@@ -89,11 +103,20 @@ $inicio = $paginamarcada - 1;
 $inicio = $inicio * $total_registros;
 
 
-$todos = mysql_query("$sql");
+$todos = mysqli_query($strcon, "$sql");
+
+
+
+
+$todos2 = mysqli_query($strcon, "$sql");
+$totalregistros = mysqli_num_rows($todos2);
+
+
+
 $resultado = mysqli_query($strcon, "$sql LIMIT $inicio,$total_registros") or die ("Erro ao tentar cadastrar registro");
 
 
-$totalregistros = mysql_num_rows($todos); // verifica o número total de registros
+ // verifica o número total de registros
 $totalpaginas = $totalregistros / $total_registros;	
 
 echo "<h2><center> Lista de Produtos no Estoque </center></h2>";
@@ -126,12 +149,12 @@ while ($registro = mysqli_fetch_array($resultado))
 //	echo "<td><span style=\"color:green;\">".$rstatus."</span></td>";
 //	}
 	
-	echo "<td><a href='alterarproduto.php?id=".$rid."&nome=".$rnome."&quantidade=".$rquantidade."&preco=".$rpreco."'><img src='imagens/editar2.png'/></a></td>";
-	echo "<td><a href='apagar.php?id=".$rid."&nome=".$rnome."&quantidade=".$rquantidade."'><img src='imagens/remover.png'/></a></td>";
+	echo "<td><a href='alterarproduto.php?id=".$rid."&nome=".$rnome."&quantidade=".$rquantidade."&preco=".$rpreco."'><img onmouseover='aumenta(this)' onMouseOut='diminui(this)'  src='imagens/editar2.png'/></a>";
+	echo " <a href='apagar.php?id=".$rid."&nome=".$rnome."&quantidade=".$rquantidade."'><img onmouseover='aumenta(this)' onMouseOut='diminui(this)' src='imagens/remover.png'/></a></td>";
 	echo "</tr>";
 
 }
-mysqli_close($strcon);
+//mysqli_close($strcon);
 echo "</table></center>";
 
 $anterior = $paginamarcada -1;
@@ -139,22 +162,34 @@ $anterior = $paginamarcada -1;
 $proximo = $paginamarcada +1;
 
 
+if ($totalpaginas >= $paginamarcada){
 echo "<h4 align=Right >Pagina $paginamarcada </br>";
 if ($paginamarcada>1) {
-echo "<a href='?pagina=$anterior' align=Right style=\"text-decoration: none; color:4f6b72;\" onMouseOver=\"this.style.textDecoration='underline';\" onMouseOut=\"this.style.textDecoration='none';\"><- Anterior</a> ";
-}
+echo "<a href='?pagina=$anterior' align=Right style=\"text-decoration: none; color:4f6b72;\" onMouseOver=\"this.style.textDecoration='underline';\" onMouseOut=\"this.style.textDecoration='none';\"><- Anterior</a> ";}
 echo "|";
 echo "<a href='?pagina=$proximo' style=\"text-decoration: none; color:4f6b72;\" onMouseOver=\"this.style.textDecoration='underline';\" onMouseOut=\"this.style.textDecoration='none';\">Próxima -></a></h4>";
-
+}
+elseif ($parametro){
+echo "<h4 align=Right >Pagina Unica - Filtrada </br>";
+echo "<input type='button' value='Voltar' onClick='history.go(-1)'></h4>"; 
+}
+else{	
+echo "<h4 align=Right >Pagina $paginamarcada </br>";	
+echo "<a href='?pagina=$anterior' align=Right style=\"text-decoration: none; color:4f6b72;\" onMouseOver=\"this.style.textDecoration='underline';\" onMouseOut=\"this.style.textDecoration='none';\"><- Anterior</a></h4>";
+}
 
 ?>
 <br>
 <br>
-<center><a href="cadastrarproduto.php"><input type="button" value="Produto Novo">
+<center><a href="cadastrarproduto.php"><input type="button" value="Cadastrar produto Novo">
 
-<a href="entradasaida.php"><input type="button" value="Entrada/Saída de Produto"></a>
+<a href="entradasaida.php?pagina=1"><input type="button" value="Entrada/Saída de Produto"></a>
 
-<a href="visualizarlog.php"><input type="button" value="Ultimas Mudanças"></a></center>
+
+
+
+
+<a href="visualizarlog.php?pagina=1"><input type="button" value="Ultimas Mudanças"></a></center>
 </form>
 
 <br>
@@ -205,15 +240,15 @@ echo "</tr>";
 
 $sql2 = "SELECT * FROM produtosretirada order by hora desc";
 $total_registros2 = "100";
-$strcon2 = mysqli_connect('localhost', 'root', '9L@d@$9', 'estoque') or die ('Erro ao conectar ao banco de dados');
+$strcon2 = mysqli_connect($servidor, $usuario, $senha, $dbname) or die ('Erro ao conectar ao banco de dados');
 
 
 
-$todos2 = mysql_query("$sql2");
+$todos2 = mysqli_query($strcon, "$sql2");
 $resultado2 = mysqli_query($strcon2, "$sql2 LIMIT $inicio,$total_registros") or die ("Erro ao tentar cadastrar registro");
 
 
-$totalregistros2 = mysql_num_rows($todos2); // verifica o número total de registros
+$totalregistros2 = mysqli_num_rows($todos2); // verifica o número total de registros
 
 echo "<h2><center> Lista de Transações de Produtos </center></h2>";
 

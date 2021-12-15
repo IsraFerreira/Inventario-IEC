@@ -19,6 +19,7 @@
 <p><center>
 <form action="<?php echo $_SERVER['PHP_SELF']; ?>">
 <input type="text" name="parametro" placeholder="Filtrar" />
+<input type="text" name="pagina" value="1" hidden />
 <input type="submit" value="Ordenar" />
 </form>
 </p></center>
@@ -27,7 +28,7 @@
 
 
 <?php
-
+include_once('con.php');
 
 
 
@@ -67,7 +68,7 @@ $paginamarcada = $pagina;
 //conectando ao banco de dados;
 $parametro = filter_input(INPUT_GET, "parametro");
 
-$strcon = mysqli_connect('localhost', 'root', '9L@d@$9', 'estoque') or die ('Erro ao conectar ao banco de dados');
+$strcon = mysqli_connect($servidor, $usuario, $senha, $dbname) or die ('Erro ao conectar ao banco de dados');
 //$sql = "SELECT * FROM dadospaciente";
 //$resultado = mysqli_query($strcon, "$sql LIMIT $inicio,$total_registros") or die ("Erro ao tentar cadastrar registro");
 
@@ -94,11 +95,18 @@ $inicio = $paginamarcada - 1;
 $inicio = $inicio * $total_registros;
 
 
-$todos = mysql_query("$sql");
+$todos = mysqli_query($strcon, "$sql");
+
+
+
+$todos2 = mysqli_query($strcon, "$sql");
+$totalregistros = mysqli_num_rows($todos2);
+
+
 $resultado = mysqli_query($strcon, "$sql LIMIT $inicio,$total_registros") or die ("Erro ao tentar cadastrar registro");
 
 
-$totalregistros = mysql_num_rows($todos); // verifica o número total de registros
+//$totalregistros = mysql_num_rows($todos); // verifica o número total de registros
 $totalpaginas = $totalregistros / $total_registros;	
 
 echo "<h2><center> Lista de Transações de Produtos </center></h2>";
@@ -155,22 +163,30 @@ $anterior = $paginamarcada -1;
 $proximo = $paginamarcada +1;
 
 
+if ($totalpaginas >= $paginamarcada){
 echo "<h4 align=Right >Pagina $paginamarcada </br>";
 if ($paginamarcada>1) {
-echo "<a href='?pagina=$anterior' align=Right style=\"text-decoration: none; color:4f6b72;\" onMouseOver=\"this.style.textDecoration='underline';\" onMouseOut=\"this.style.textDecoration='none';\"><- Anterior</a> ";
-}
+echo "<a href='?pagina=$anterior' align=Right style=\"text-decoration: none; color:4f6b72;\" onMouseOver=\"this.style.textDecoration='underline';\" onMouseOut=\"this.style.textDecoration='none';\"><- Anterior</a> ";}
 echo "|";
 echo "<a href='?pagina=$proximo' style=\"text-decoration: none; color:4f6b72;\" onMouseOver=\"this.style.textDecoration='underline';\" onMouseOut=\"this.style.textDecoration='none';\">Próxima -></a></h4>";
-
+}
+elseif ($parametro){
+echo "<h4 align=Right >Pagina Unica - Filtrada </br>";
+echo "<input type='button' value='Voltar' onClick='history.go(-1)'></h4>"; 
+}
+else{	
+echo "<h4 align=Right >Pagina $paginamarcada </br>";	
+echo "<a href='?pagina=$anterior' align=Right style=\"text-decoration: none; color:4f6b72;\" onMouseOver=\"this.style.textDecoration='underline';\" onMouseOut=\"this.style.textDecoration='none';\"><- Anterior</a></h4>";
+}
 
 ?>
 <br>
 <br>
-<center><a href="cadastrarproduto.php"><input type="button" value="Produto Novo No Estoque"></a>
+<center><a href="cadastrarproduto.php"><input type="button" value="Cadastrar Produto Novo"></a>
 
-<a href="visualizar.php"><input type="button" value="Visualizar Estoque"></a>
+<a href="visualizar.php?pagina=1"><input type="button" value="Visualizar Estoque"></a>
 
-<a href="entradasaida.php"><input type="button" value="Entrada/Saída de Produto"></a></center>
+<a href="entradasaida.php?pagina=1"><input type="button" value="Entrada/Saída de Produto"></a></center>
 </form>
 
 <br>

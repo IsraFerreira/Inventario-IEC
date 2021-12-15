@@ -1,9 +1,6 @@
 ﻿<?php
 session_start();
-$servidor = "localhost";
-$usuario = "root";
-$senha = "9L@d@$9";
-$dbname = "estoque";
+include_once('con.php');
 
 //criar a conexão
 $conn7 = mysqli_connect($servidor, $usuario, $senha, $dbname);
@@ -15,20 +12,13 @@ $quantidade = $_POST['quantidade2'];
 $preco = $_POST['preco2'];
 
 
-//$servidor = "localhost";
-//$usuario = "root";
-//$senha = "9L@d@$9";
-//$dbname = "estoque";
-$servidor = "localhost";
-$usuario = "root";
-$senha = "9L@d@$9";
-$dbname = "estoque";
+
 
 //criar a conexão
 $conn = mysqli_connect($servidor, $usuario, $senha, $dbname);	
 $ip = $_SERVER['REMOTE_ADDR']; // Salva o IP do visitante
 $hora = date('Y-m-d H:i:s'); // Salva a data e hora atual (formato MySQL)
-$visita = mysql_escape_string($visita);
+//$visita = mysql_escape_string($visita);
 $visita = "Produto Atualizado";
 
 
@@ -45,5 +35,5 @@ $atualizpaciente = mysqli_query($conn, $atualizapaciente)
 ?>
 
 <?php
-header("Location:visualizar.php");
+header("Location:visualizar.php?pagina=1");
 ?>

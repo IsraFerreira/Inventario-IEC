@@ -17,15 +17,12 @@
 <?php
 
 
-$servidor = "localhost";
-$usuario = "root";
-$senha = "9L@d@$9";
-$dbname = "estoque";
+include_once('con.php');
 
 //criar a conexão
 $conn2 = mysqli_connect($servidor, $usuario, $senha, $dbname);
 
-if(mysqli_connect_errno($conn2)){
+if(!$conn2){
 	 echo "Falha na conexão com o banco de dados";
 }else{
      echo "<center><h3>Produto Removido</h3></center>";
@@ -41,11 +38,11 @@ $quantidade = filter_input(INPUT_GET, 'quantidade', FILTER_SANITIZE_STRING);
 <br>
 <br>
 
-<center><h2 style = "font-family:Helvetica ">Produto a ser removido</h2></center>
+<center><h2 style = "font-family:Helvetica ">Produto removido</h2></center>
 
 <br>
 
-<form align="left" position-left="201px" action="produtoremovido.php" method="post"><h3> 
+<form align="left" position-left="201px" action="visualizar.php?pagina=1" method="post"><h3> 
 
 ID:
 <input type="int" name="id2" placeholder="ID" value="<?php echo $id; ?>" readonly="true"> <br><br>
@@ -61,7 +58,7 @@ Quantidade:
 
 <center><input type="submit" value="Ok">
 
-<a href="visualizar.php"><input type="button" value="Visualizar Estoque"></a>
+<a href="visualizar.php?pagina=1"><input type="button" value="Visualizar Estoque"></a>
 
 </body>
 <!-- Feito por: Israel Ferreira Nonato da Silva, venda ou troca sem passar pelo mesmo será vista como crime de plágio. -->

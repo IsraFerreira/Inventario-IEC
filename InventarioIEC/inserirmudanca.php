@@ -1,12 +1,8 @@
 ﻿<?php
 session_start();
-$servidor = "localhost";
-$usuario = "root";
-$senha = "9L@d@$9";
-$dbname = "estoque";
+include_once('con.php');
 
 //criar a conexão
-$conn7 = mysqli_connect($servidor, $usuario, $senha, $dbname);
 
 
 $id = $_POST['id2'];
@@ -19,16 +15,12 @@ $setor = $_POST['setor2'];
 $preco = $_POST['preco2'];
 
 
-$servidor = "localhost";
-$usuario = "root";
-$senha = "9L@d@$9";
-$dbname = "estoque";
 
 //criar a conexão
 $conn = mysqli_connect($servidor, $usuario, $senha, $dbname);	
 $ip = $_SERVER['REMOTE_ADDR']; // Salva o IP do visitante
 $hora = date('Y-m-d H:i:s'); // Salva a data e hora atual (formato MySQL)
-$visita = mysql_escape_string($visita);
+//$visita = mysql_escape_string($visita);
 $visita = "Produto Retirado/Acrescentado";
 
 
@@ -39,25 +31,25 @@ $log2 = mysqli_query($conn, $log);
 if($quantidadeacr == 0){
 $quantidade = ($quantidadeanterior - $quantidaderet);
 $mensagem = "Produto Retirado";
-$inserirmudanca = "INSERT INTO produtosretirada(ID, nome, quantidaderet, quantidadetotal, chamado, setor, ip, hora, mensagem, preco) VALUES ('$id', '$nome', '$quantidaderet', '$quantidade', '$chamado', '$setor', '$ip', '$hora', '$mensagem', '$preco')";
-$inserirmudanca2 = mysqli_query($conn7, $inserirmudanca);}
+$inserirmudanca = "INSERT INTO produtosretirada(ID, nome, quantidadeacr, quantidaderet, quantidadetotal, chamado, setor, ip, hora, mensagem, preco) VALUES ('$id', '$nome', '0', '$quantidaderet', '$quantidade', '$chamado', '$setor', '$ip', '$hora', '$mensagem', '$preco')";
+$inserirmudanca2 = mysqli_query($conn, $inserirmudanca);
+}
 else{
 $quantidade = ($quantidadeanterior + $quantidadeacr);
 $mensagem = "Produto Acrescentado";
-$inserirmudanca3 = "INSERT INTO produtosretirada(ID, nome, quantidadeacr, quantidadetotal, chamado, setor, ip, hora, mensagem, preco) VALUES ('$id', '$nome', '$quantidadeacr', '$quantidade', '$chamado', '$setor', '$ip', '$hora', '$mensagem', '$preco')";
-$inserirmudanca4 = mysqli_query($conn7, $inserirmudanca3);
+$inserirmudanca3 = "INSERT INTO produtosretirada(ID, nome, quantidadeacr, quantidaderet, quantidadetotal, chamado, setor, ip, hora, mensagem, preco) VALUES ('$id', '$nome', '$quantidadeacr', '0', '$quantidade', '$chamado', '$setor', '$ip', '$hora', '$mensagem', '$preco')";
+$inserirmudanca4 = mysqli_query($conn, $inserirmudanca3);
 }
 
 
-
-$atualizapaciente = "UPDATE produtos SET ID = '$id', nome = '$nome', quantidade = '$quantidade' WHERE ID='$id'";
+$atualizaproduto = "UPDATE produtos SET ID = '$id', nome = '$nome', quantidade = '$quantidade' WHERE ID='$id'";
 //$atualizapaciente = "UPDATE dadospaciente SET nomedopaciente = '$nomedopaciente', nomedamae = '$nomedamae', prontuario = '$prontuario', sexo = '$sexo', prioridade = '$prioridade', grupo = '$grupo', diagnostico = '$diagnostico', nomedomedico = '$nomedomedico', status = '$status', contatos = '$contatos', data = '$data' WHERE nomedopaciente='$nomedopaciente'";
-$atualizpaciente = mysqli_query($conn7, $atualizapaciente)
+$atualizaproduto2 = mysqli_query($conn, $atualizaproduto);
 
 
 //<!-- Feito por: Israel Ferreira Nonato da Silva, venda ou troca sem passar pelo mesmo será vista como crime de plágio. -->
 ?>
 
 <?php
-header("Location:visualizarlog.php");
+header("Location:visualizarlog.php?pagina=1");
 ?>
