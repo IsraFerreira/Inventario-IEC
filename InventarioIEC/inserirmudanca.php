@@ -23,13 +23,13 @@ $log2 = mysqli_query($conn, $log);
 $quantidade = $quantidadeacr;
 $mensagem = "Equipamento Movimentado";
 $inserirmudanca3 = "INSERT INTO produtosretirada(ID, nome, quantidadeacr, quantidadeant, quantidadetotal, chamado, setor, ip, hora, mensagem, preco) VALUES ('$id', '$nome', '$quantidadeacr', '$quantidadeanterior', '$quantidade', '$chamado', '$setor', '$ip', '$hora', '$mensagem', '$preco')";
-$inserirmudanca4 = mysqli_query($conn7, $inserirmudanca3);
+$inserirmudanca4 = mysqli_query($conn, $inserirmudanca3);
 
 
 
 
 $atualizapaciente = "UPDATE produtos SET ID = '$id', nome = '$nome', quantidade = '$quantidade' WHERE ID='$id'";
-$atualizpaciente = mysqli_query($conn7, $atualizapaciente)
+$atualizpaciente = mysqli_query($conn, $atualizapaciente)
 ?>
 
 <?php
