@@ -3,33 +3,27 @@
 $login = filter_input(INPUT_GET, "login");
 echo $login;
 
-
 ?>
+
 <html>
 <meta charset="UTF-8">
-<head>
-<LINK REL="SHORTCUT ICON" href="imagens/imagem2.jpg">
-<link href="styles/css.css" rel="stylesheet" type="text/css">
-<title> Entrada/Saída</title>
+    <head>
+        <LINK REL="SHORTCUT ICON" href="imagens/logo.png">
+        <link href="styles/css.css" rel="stylesheet" type="text/css">
+        <title>Opções</title>
 
-</head>
+    </head>
 
-<body>
-<img style=" vertical-align:'middle'; margin-left:-18px" width="635px" height="140px" src="imagens/imagem4.jpg"/>
-<br>
-<br>
+    <body>
+    <div class="total">
+    <div class="inicial">
+        <img src="imagens/logo.png"/>
+        <h3>Escolha uma das opções</h3>
 
-<center><h2 style = "font-family:Helvetica ">Escolha uma das opções</h2></center>
-
-<br>
-<center>
-<a href="visualizar.php?pagina=1"><input type="button" value="Visualizar Estoque"></a>
-
-<a href="entrada.php?pagina=1"><input type="button" value="Cadastrar Produto Novo"></a>
-
-<a href="entradasaida.php?pagina=1"><input type="button" value="Entrada/Saída Produto"></a></center>
-
-</form>
-</body>
-<!-- Feito por: Israel Ferreira Nonato da Silva, venda ou troca sem passar pelo mesmo será vista como crime de plágio. -->
-</html> 
+        <a href="visualizar.php"><input type="button" value="Visualizar Inventário" class="botao"></a>
+        <a href="cadastrarproduto.php"><input type="button" value="Cadastrar Equip" class="botao"></a>
+        <a href="editarproduto.php?login=".$login><input type="button" value="Editar Equip" class="botao"></a>
+</div>
+</div>
+    </body>
+</html>

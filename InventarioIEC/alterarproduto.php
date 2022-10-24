@@ -1,70 +1,40 @@
-﻿<?php
-
-
-
-?>
-
-<html>
-<meta charset="UTF-8">
-<head>
-<LINK REL="SHORTCUT ICON" href="imagens/imagem2.jpg">
-<link href="styles/css.css" rel="stylesheet" type="text/css">
-<title> Edição de Produto </title>
-</head>
-<body>
-<img style=" vertical-align:'middle'; margin-left:-18px; margin-top:-18px" width="635px" height="140px" src="imagens/imagem4.jpg"/>
+﻿<html>
+     <meta charset="UTF-8">
+     <head>
+     <LINK REL="SHORTCUT ICON" href="imagens/logo.png">
+          <link href="styles/css.css" rel="stylesheet" type="text/css">
+          <title>Edição de Equipamento</title>
+     </head>
+     <body>
+          <div class="total">
+               <div class="inicial">
+                    <img src="imagens/logo.png"/>
 
 <?php
+include("connection.php");
 
-
-include_once('con1.php');
-
-//criar a conexão
-$conn2 = mysqli_connect($servidor, $usuario, $senha, $dbname);
-
-if(!$conn2){
-	 echo "Falha na conexão com o banco de dados";
-}else{
-     echo "<center><h3>Produto Editado</h3></center>";
-}
 
 $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_STRING);
 $nome = filter_input(INPUT_GET, 'nome', FILTER_SANITIZE_STRING);
-//echo $nomedamae;
 $quantidade = filter_input(INPUT_GET, 'quantidade', FILTER_SANITIZE_STRING);
 $preco = filter_input(INPUT_GET, 'preco', FILTER_SANITIZE_STRING);
-//echo $prontuario;
+
 
 ?>
 
-<br>
-<br>
-
-<center><h2 style = "font-family:Helvetica ">Atualizar dados do Produto</h2></center>
-
-<br>
-
-<form align="left" position-left="201px" action="inserir.php" method="post"><h3> 
-
-ID:
-<input type="int" name="id2" placeholder="ID" value="<?php echo $id; ?>" readonly="true"> <br><br>
-
-Nome:
-<input type="text" name="nome2" placeholder="Nome" value="<?php echo $nome; ?>"> <br><br>
-
-Quantidade:
-<input type="int" name="quantidade2" value="<?php echo $quantidade; ?>"/><h5 style="color:red">    Não dê saída / entrada por aqui</h5><br>
-
-
-Preço R$:
-<input type="text" name="preco2" value="<?php echo $preco; ?>" /><br><br>
-
-</h3>
-
-<center><input type="submit" value="Atualizar">
-</form>
-</center>
-
-</body>
-<!-- Feito por: Israel Ferreira Nonato da Silva, venda ou troca sem passar pelo mesmo será vista como crime de plágio. -->
+                    <h3>Atualizar dados do Equipamento</h3>
+                    <form action="inserir.php" method="post">
+                         ID:
+                         <input type="int" name="id2" placeholder="ID" value="<?php echo $id; ?>" readonly="true" class="bloqueado"> <br><br>
+                         <label class="editavel" id="editavel1">Nome:</label>
+                         <input type="text" name="nome2" placeholder="Nome" value="<?php echo $nome; ?>" class="editavel" /> <br><br>
+                         <label class="editavel">Quantidade:</label>
+                         <input type="int" name="quantidade2" value="<?php echo $quantidade; ?>" class="editavel" /><h5>Não dê saída / entrada por aqui</h5><br>
+                         <label class="editavel">Preço R$:</label>
+                         <input type="text" name="preco2" value="<?php echo $preco; ?>" class="editavel" /><br><br>
+                         <input type="submit" value="Atualizar" class="botao">
+                    </form>
+               </div>
+          </div>
+     </body>
 </html>

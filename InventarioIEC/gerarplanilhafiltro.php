@@ -5,8 +5,7 @@
  * porém lembre -se de conceder os créditos ao desenvolvedor.
  *-->
  <?php
-	session_start();
-	include_once('conexaoplanilha.php');
+	include("connection.php");
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -18,13 +17,13 @@
 		<?php
 		$parametro = filter_input(INPUT_GET, "parametro");
 		// Definimos o nome do arquivo que será exportado
-		$arquivo = 'EstoqueFiltro.xls';
+		$arquivo = 'InventarioFiltro.xls';
 		
 		// Criamos uma tabela HTML com o formato da planilha
 		$html = '';
 		$html .= '<table border="1">';
 		$html .= '<tr>';
-		$html .= '<td colspan="4">Planilha Estoque Filtro</tr>';
+		$html .= '<td colspan="4">Planilha Inventario Filtro</tr>';
 		$html .= '</tr>';
 		
 		

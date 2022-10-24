@@ -1,51 +1,36 @@
 ﻿<?php
-include_once('con1.php');
-
-//criar a conexão
-$connnn = mysqli_connect($servidor, $usuario, $senha, $dbname);
-
+include("connection.php");
 ?>
 
 <html>
-<meta charset="UTF-8">
-<head>
-<LINK REL="SHORTCUT ICON" href="imagens/imagem2.jpg">
-<link href="styles/css.css" rel="stylesheet" type="text/css">
-<title> Cadastrar Produto </title>
+    <meta charset="UTF-8">
+    <head>
+    <LINK REL="SHORTCUT ICON" href="imagens/logo.png">
+        <link href="styles/css.css" rel="stylesheet" type="text/css">
+        <title>Cadastrar Equipamento</title>
+    </head>
 
-</head>
+    <body>
+        <div class="total">
+            <div class="inicial">
+                <img src="imagens/logo.png"/>
+                <h3>Cadastre Novo Equipamento</h3>
 
-<body>
-<img style=" vertical-align:'middle'; margin-left:-18px" width="635px" height="140px" src="imagens/imagem4.jpg"/>
-<br>
-<br>
-
-<center><h2 style = "font-family:Helvetica ">Cadastre Novo produto</h2></center>
-
-<br>
-
-<form align="left" position-left="201px" action="dadosproduto.php" method="post"><h3> 
-
-Nome do Produto:
-<input type="text" name="nome" placeholder="Nome" required> <br><br>
-
-Quantidade:
-<input type="int" name="quantidade" placeholder="Quantidade" required> <br><br>
-
-Preço R$:
-<input type="text" name="preco" placeholder="preco" required> <br><br>
+                <form action="dadosproduto.php" method="post"> 
+                    Nome do Produto:
+                    <input type="text" name="nome" placeholder="Nome" required> <br><br>
+                    Quantidade:
+                    <input type="int" name="quantidade" placeholder="Quantidade" required> <br><br>
+                    Preço R$:
+                    <input type="text" name="preco" placeholder="preco" required> <br><br>
 
 
-</h3>
+                    <input type="submit" value="Cadastrar Equip" class="botao">
+                    <input type="reset" value="Limpar" class="botao">
+                    <a href="visualizar.php"><input type="button" value="Visualizar Inventário" class="botao"></a>
+                </form>
+            </div>  
+        </div>
 
-<center><input type="submit" value="Cadastrar Produto">
-
-<input type="reset" value="Limpar">
-
-<a href="visualizar.php?pagina=1"><input type="button" value="Visualizar Estoque"></a></center>
-
-</form>
-
-</body>
-<!-- Feito por: Israel Ferreira Nonato da Silva, venda ou troca sem passar pelo mesmo será vista como crime de plágio. -->
+    </body>
 </html>

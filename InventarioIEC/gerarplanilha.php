@@ -5,8 +5,7 @@
  * porém lembre -se de conceder os créditos ao desenvolvedor.
  *-->
  <?php
-	session_start();
-	include_once('conexaoplanilha.php');
+	include("connection.php");
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -17,13 +16,13 @@
 	<body>
 		<?php
 		// Definimos o nome do arquivo que será exportado
-		$arquivo = 'Estoque.xls';
+		$arquivo = 'Inventario.xls';
 		
 		// Criamos uma tabela HTML com o formato da planilha
 		$html = '';
 		$html .= '<table border="1">';
 		$html .= '<tr>';
-		$html .= '<td colspan="5">Planilha Estoque</tr>';
+		$html .= '<td colspan="5">Planilha Inventario</tr>';
 		$html .= '</tr>';
 		
 		

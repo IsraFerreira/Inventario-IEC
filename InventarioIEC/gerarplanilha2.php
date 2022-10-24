@@ -5,8 +5,7 @@
  * porém lembre -se de conceder os créditos ao desenvolvedor.
  *-->
  <?php
-	session_start();
-	include_once('conexaoplanilha.php');
+	include("connection.php");
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -17,21 +16,20 @@
 	<body>
 		<?php
 		// Definimos o nome do arquivo que será exportado
-		$arquivo = 'Estoque.xls';
+		$arquivo = 'Inventario.xls';
 		
 		// Criamos uma tabela HTML com o formato da planilha
 		$html = '';
 		$html .= '<table border="1">';
 		$html .= '<tr>';
-		$html .= '<td colspan="10">Planilha Transições Estoque</tr>';
+		$html .= '<td colspan="10">Planilha Transições Inventário</tr>';
 		$html .= '</tr>';
 		
 		
 		$html .= '<tr>';
 		$html .= '<td><b>ID</b></td>';
 		$html .= '<td><b>Nome</b></td>';
-		$html .= '<td><b>Quantidade+</b></td>';
-		$html .= '<td><b>Quantidade-</b></td>';
+		$html .= '<td><b>Quantidadeanterior</b></td>';
 		$html .= '<td><b>Quantidadetotal</b></td>';
 		$html .= '<td><b>chamado</b></td>';
 		$html .= '<td><b>setor</b></td>';
@@ -49,8 +47,7 @@
 			$html .= '<tr>';
 			$html .= '<td>'.$row["ID"].'</td>';
 			$html .= '<td>'.$row["nome"].'</td>';
-			$html .= '<td>'.$row["quantidadeacr"].'</td>';
-			$html .= '<td>'.$row["quantidaderet"].'</td>';
+			$html .= '<td>'.$row["quantidadeant"].'</td>';
 			$html .= '<td>'.$row["quantidadetotal"].'</td>';
 			$html .= '<td>'.$row["chamado"].'</td>';
 			$html .= '<td>'.$row["setor"].'</td>';
