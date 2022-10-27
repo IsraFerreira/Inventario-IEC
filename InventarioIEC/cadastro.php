@@ -1,9 +1,10 @@
 ﻿<?php 
+include("connection.php");
  
 $login = $_POST['login'];
-$senha = MD5($_POST['senha']);
-$connect = mysql_connect('localhost','root','9L@d@$9');
-$db = mysql_select_db('estoque');
+$senhaCadastro = MD5($_POST['senha']);
+$connect = mysql_connect($servidor, $usuario, $senha);
+$db = mysql_select_db($dbname);
 $query_select = "SELECT login FROM usuarios WHERE login = '$login'";
 $select = mysql_query($query_select,$connect);
 $array = mysql_fetch_array($select);
@@ -19,11 +20,11 @@ $logarray = $array['login'];
         die();
  
       }else{
-        $query = "INSERT INTO usuarios (login,senha) VALUES ('$login','$senha')";
+        $query = "INSERT INTO usuarios (login,senha) VALUES ('$login','$senhaCadastro')";
         $insert = mysql_query($query,$connect);
          
         if($insert){
-          echo"<script language='javascript' type='text/javascript'>alert('Usuário cadastrado com sucesso!');window.location.href='login2.html'</script>";
+          echo"<script language='javascript' type='text/javascript'>alert('Usuário cadastrado com sucesso!');window.location.href='login.html'</script>";
         }else{
           echo"<script language='javascript' type='text/javascript'>alert('Não foi possível cadastrar esse usuário');window.location.href='cadastro.html'</script>";
         }

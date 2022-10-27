@@ -1,8 +1,6 @@
 ﻿<?php
-
 $login = filter_input(INPUT_GET, "login");
 echo $login;
-
 ?>
 
 <html>
@@ -23,7 +21,13 @@ echo $login;
         <a href="visualizar.php"><input type="button" value="Visualizar Inventário" class="botao"></a>
         <a href="cadastrarproduto.php"><input type="button" value="Cadastrar Equip" class="botao"></a>
         <a href="editarproduto.php?login=".$login><input type="button" value="Editar Equip" class="botao"></a>
+
+
 </div>
 </div>
+
+<?php 
+// include("config.php");
+?>
     </body>
 </html>
