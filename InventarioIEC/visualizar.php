@@ -129,6 +129,7 @@ echo "</div>";
 <a href="cadastrarproduto.php"><input type="button" value="Cadastrar Equip" class="botao"></a>
 <a href="editarproduto.php"><input type="button" value="Editar Equip" class="botao"></a>
 <a href="visualizarlog.php"><input type="button" value="Visualizar Mudanças" class="botao"></a>
+<a href="http://172.16.3.38/Sistemas-Integrados/escolha.php"><input type="button" value="Sistemas Integrados" class="botao"></a>
 <br>
 <br>
 <a href="gerarplanilha.php"><input type="button" value="EXCEL Completo" class="botao"></a>
