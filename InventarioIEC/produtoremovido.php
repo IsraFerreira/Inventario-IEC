@@ -1,4 +1,16 @@
-﻿<html>
+﻿<?php
+include("connection.php");
+session_start();
+$logged = $_SESSION['logged'];
+
+if($logged != true){ 
+    echo"<script language='javascript' type='text/javascript'>alert('É necessário fazer o login primeiro');window.location.href='login.html';</script>";  
+}
+
+
+?>
+
+<html>
     <meta charset="UTF-8">
 <head>
 <LINK REL="SHORTCUT ICON" href="imagens/logo.png">
@@ -8,14 +20,10 @@
 <body>
     <div class="total">
         <div class="inicial">
+        <?php include("session.php"); ?>
             <img src="imagens/logo.png"/>
 
 <?php
-include("connection.php");
-
-$login = filter_input(INPUT_GET, "login");
-echo $login;
-
 $conn2 = mysqli_connect($servidor, $usuario, $senha, $dbname);
 
 $id = filter_input(INPUT_GET, 'id2', FILTER_SANITIZE_STRING);

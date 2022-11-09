@@ -1,6 +1,11 @@
 ﻿<?php
-$login = filter_input(INPUT_GET, "login");
-echo $login;
+session_start();
+$logged = $_SESSION['logged'];
+
+if($logged != true){ 
+    echo"<script language='javascript' type='text/javascript'>alert('É necessário fazer o login primeiro');window.location.href='login.html';</script>";  
+}
+
 ?>
 
 <html>
@@ -15,6 +20,7 @@ echo $login;
     <body>
     <div class="total">
     <div class="inicial">
+    <?php include("sessionCad.php"); ?>
         <img src="imagens/logo.png"/>
         <h3>Escolha uma das opções</h3>
 
@@ -26,8 +32,5 @@ echo $login;
 </div>
 </div>
 
-<?php 
-// include("config.php");
-?>
     </body>
 </html>

@@ -1,5 +1,12 @@
 ﻿<?php
 include("connection.php");
+session_start();
+$logged = $_SESSION['logged'];
+
+if($logged != true){ 
+    echo"<script language='javascript' type='text/javascript'>alert('É necessário fazer o login primeiro');window.location.href='login.html';</script>";  
+}
+
 
 $ip = $_SERVER['REMOTE_ADDR']; // Salva o IP do visitante
 $hora = date('Y-m-d H:i:s'); // Salva a data e hora atual (formato MySQL)
@@ -28,6 +35,7 @@ $quantidade = filter_input(INPUT_GET, 'quantidade', FILTER_SANITIZE_STRING);
 <body>
     <div class="total">
         <div class="inicial">
+        <?php include("session.php"); ?>
             <img src="imagens/logo.png"/>
 
 <?php

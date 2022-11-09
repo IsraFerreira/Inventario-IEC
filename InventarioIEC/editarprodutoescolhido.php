@@ -1,4 +1,14 @@
+<?php 
+include("connection.php");
+session_start();
+$logged = $_SESSION['logged'];
 
+if($logged != true){ 
+    echo"<script language='javascript' type='text/javascript'>alert('É necessário fazer o login primeiro');window.location.href='login.html';</script>";  
+}
+
+
+?>
 <html>
     <meta charset="UTF-8">
     <head>
@@ -9,11 +19,10 @@
     <body>
         <div class="total">
             <div class="inicial">
+            <?php include("session.php"); ?>
                 <img src="imagens/logo.png"/>
 
 <?php
-include("connection.php");
-
 
 $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_STRING);
 $nome = filter_input(INPUT_GET, 'nome', FILTER_SANITIZE_STRING);

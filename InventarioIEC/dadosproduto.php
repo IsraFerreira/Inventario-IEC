@@ -1,5 +1,12 @@
 ﻿<?php
 include("connection.php");
+session_start();
+$logged = $_SESSION['logged'];
+
+if($logged != true){ 
+    echo"<script language='javascript' type='text/javascript'>alert('É necessário fazer o login primeiro');window.location.href='login.html';</script>";  
+}
+
 
 $login = filter_input(INPUT_GET, "login");
 echo $login;
@@ -36,6 +43,7 @@ $dadopaciente = mysqli_query($conn, $dadospaciente)
     <body>
         <div class="total">
             <div class="inicial">
+            <?php include("session.php"); ?>
                 <h3>Equipamento Cadastrado com Sucesso!</h3>
                 <img src="./imagens/logo.png" alt="Logo Cérebro">
                 <form>
